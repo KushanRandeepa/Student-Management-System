@@ -20,14 +20,15 @@ public class StudentEntity {
     private String id;
     private String username;
     private String email;
+    private String password;
     private String fullName;
     private String phoneNumber;
     private String address;
-    private String gradeLevel;
-    private List<Long> enrolledSubjectIds;
+    private String grade;
+//    private List<Long> subjects;
     private String state;
-    private String profileImageUrl; // e.g., "https://cdn.example.com/images/students/12.jpg"
+    private String profileImage; // e.g., "https://cdn.example.com/images/students/12.jpg"
     private LocalDateTime createdAt;
-    private String password;
+
 
 }

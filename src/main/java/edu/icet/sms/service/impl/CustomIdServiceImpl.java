@@ -14,19 +14,21 @@ public class CustomIdServiceImpl implements CustomIdService {
 
     public  String generateCustomId(LocalDateTime dateTime){
         String customId;
+        int count=0;
         UserEntity lastUser =userRepository.findTopByOrderByIdDesc();
         if(lastUser==null){
-            String date= String.valueOf(dateTime);
-            String substring = date.substring(3, 5);
-            customId="AD"+substring+"0001";
-        }else {
-            String lastUserCustomId = lastUser.getCustomId();
-            String prefix = getPrefix(lastUser);
             String year= String.valueOf(dateTime.getYear());
             String subStrDate= year.substring(2);
-            int count= Integer.parseInt(lastUserCustomId.substring(4,8));
-            count++;
-            customId=prefix+subStrDate+count;
+            String prefix="AD"+subStrDate;
+            customId=String.format("%s%04d",prefix,count+1);
+        }else {
+            String lastUserCustomId = lastUser.getCustomId();
+            String year= String.valueOf(dateTime.getYear());
+            String subStrDate= year.substring(2);
+            String prefix = getPrefix(lastUser)+subStrDate;
+            count= Integer.parseInt(lastUserCustomId.substring(4,8));
+
+            customId=String.format("%s%04d",prefix,count+1);
         }
         return customId;
     }
