@@ -25,9 +25,8 @@ public class StudentEntity {
     private String phoneNumber;
     private String address;
     private String grade;
-//    private List<Long> subjects;
     private String state;
-    private String profileImage; // e.g., "https://cdn.example.com/images/students/12.jpg"
+    private String imgUrl;
     private LocalDateTime createdAt;
 
 

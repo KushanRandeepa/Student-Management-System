@@ -1,5 +1,5 @@
 package edu.icet.sms.utill;
 
-public enum Subjects {
+public enum Subject {
     BIOLOGY,PHYSICS,CHEMISTRY
 }

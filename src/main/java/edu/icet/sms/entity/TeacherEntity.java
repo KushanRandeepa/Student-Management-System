@@ -1,26 +1,28 @@
-package edu.icet.sms.dto;
+package edu.icet.sms.entity;
 
-import lombok.*;
+import edu.icet.sms.utill.Subject;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Student {
+@Entity
+public class TeacherEntity {
+    @Id
     private String id;
     private String username;
     private String email;
-    private String password;
     private String fullName;
     private String phoneNumber;
     private String address;
-    private String grade;
-    private String state;
+    private String age;
+    private Subject subject;
     private String imgUrl; // e.g., "https://cdn.example.com/images/students/12.jpg"
     private LocalDateTime createdAt;
-
 }

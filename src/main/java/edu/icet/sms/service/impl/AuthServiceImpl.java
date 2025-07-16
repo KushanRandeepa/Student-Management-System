@@ -3,11 +3,14 @@ package edu.icet.sms.service.impl;
 
 import edu.icet.sms.dto.SignupRequest;
 import edu.icet.sms.dto.Student;
+import edu.icet.sms.dto.Teacher;
 import edu.icet.sms.entity.UserEntity;
 import edu.icet.sms.repository.UserRepository;
 import edu.icet.sms.service.AuthService;
 import edu.icet.sms.service.CustomIdService;
 import edu.icet.sms.service.StudentService;
+import edu.icet.sms.service.TeacherService;
+import edu.icet.sms.utill.Role;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,7 @@ import java.time.temporal.ChronoUnit;
 public class AuthServiceImpl implements AuthService {
 
     final StudentService studentService;
-//    final Ad
+    final TeacherService teacherService;
     final UserRepository userRepository;
     final CustomIdService customIdService;
     final ModelMapper mapper;
@@ -34,18 +37,13 @@ public class AuthServiceImpl implements AuthService {
             user.setCreatedAt(LocalDateTime.now());
             user.setCustomId(customIdService.generateCustomId(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
             userRepository.save(user);
-//            switch (user.getRole()){
-//                    case STUDENT : Student map = mapper.map(user, Student.class);
-//                                    studentService.saveStudent(map);
-//                                    return true;
-////                    case ADMIN :    Student map = mapper.map(user, Student.class);
-////                                    studentService.saveStudent(map);
-////                                     return true;
-////                    case TEACHER:   Student map = mapper.map(user, Student.class);
-////                                    studentService.saveStudent(map);
-////                                    return true;
-//                }
-
+            if (user.getRole() == Role.STUDENT) {
+                studentService.saveStudent(mapper.map(user, Student.class));
+                return true;
+            } else if (user.getRole() == Role.TEACHER) {
+                teacherService.saveTeacher(mapper.map(user, Teacher.class));
+                return true;
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
