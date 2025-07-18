@@ -5,14 +5,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

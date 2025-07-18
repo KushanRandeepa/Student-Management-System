@@ -3,6 +3,7 @@ package edu.icet.sms.controller;
 import edu.icet.sms.dto.Teacher;
 import edu.icet.sms.service.TeacherService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,8 +11,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/teacher")
+@PreAuthorize("hasAnyRole('ADMIN','TEACHER')")
+
 public class TeacherController {
+
     final TeacherService teacherService;
+
+
     @PostMapping("/save")
     public void saveTeacher(@RequestBody Teacher teacher){
         teacherService.saveTeacher(teacher);

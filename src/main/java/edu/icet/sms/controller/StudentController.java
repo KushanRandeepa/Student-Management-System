@@ -4,6 +4,7 @@ import edu.icet.sms.dto.Student;
 import edu.icet.sms.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/student")
+@PreAuthorize("hasAnyRole('ADMIN','STUDENT')")
 public class StudentController {
 
     final StudentService studentService;
