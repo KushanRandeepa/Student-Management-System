@@ -1,24 +1,42 @@
-section {
-  display: flex;
-  align-items: center;
+
+.landing-container {
+  /* border-image: fill; */
+  background-image: url('/images/sms-1.jpg');
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  height: 100vh; /* full screen height */
+  width: 100vw; /* full screen width */
+  
 }
 
-.example-label {
-  font-size: 14px;
-  margin: 0 16px 0 8px;
-  min-width: 120px;
+.pad1{
+  padding-top: 10rem;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+.subheading {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin-top: 5rem;
+  
 }
 
-.example-button-row {
-  max-width: 600px;
+.example-form {
+  max-width: 500px;
+  width: 100%;
 }
 
-.example-button-row .mat-mdc-button-base {
-  margin: 8px 8px 8px 0;
+.example-full-width {
+  width: 100%;
 }
-
-.example-flex-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.footerbg{
+  background-color: rgb(240, 177, 243);
+  background-size: crgb(229, 229, 229)n;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  width: 100vw;
 }
