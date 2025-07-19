@@ -6,7 +6,7 @@ import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [RouterLink, MatButtonModule, MatDividerModule, MatIconModule],
+  imports: [RouterLink, MatButtonModule, MatIconModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css'
 })
