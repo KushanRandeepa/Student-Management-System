@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
+import { AuthBypassService } from '../AuthbypassService';
 
 export interface IDeactivateGuard{
     canDeactivate():boolean;
@@ -9,11 +10,14 @@ export interface IDeactivateGuard{
 })
 export class DeactivateGuardGuard implements CanDeactivate<IDeactivateGuard>{
 
-  canDeactivate(component: IDeactivateGuard, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState: RouterStateSnapshot): boolean {
-   return component.canDeactivate();
-  }
+  constructor(private bypassService: AuthBypassService) {}
 
+  canDeactivate(component: IDeactivateGuard, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState: RouterStateSnapshot): boolean {
+   if(this.bypassService.bypassGuard) {
+      this.bypassService.bypassGuard = false; // Reset the bypass flag after use
+    return true; // Allow navigation without confirmation
+  }else{
+    return component.canDeactivate();
+  }
 }
-// export const deactivateGuardGuard: CanDeactivateFn<IDeactivateGuard> = (component, currentRoute, currentState, nextState) => {
-//   return true;
-// };
+}

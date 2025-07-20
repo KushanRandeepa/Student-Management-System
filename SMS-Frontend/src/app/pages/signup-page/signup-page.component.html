@@ -6,52 +6,109 @@
 <mat-stepper linear="true" #stepper>
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
+            <ng-template matStepLabel>Fill out your credentials</ng-template>
 
-            <div class="container  mt-5  ">
+            <div class="container mt-5 ">
                 <div>
-                    <mat-form-field appearance="outline" class="w-25 mb-3">
-                        <mat-label>Name</mat-label>
-                        <input matInput placeholder="Last name, First name" formControlName="name" required>
+                    <mat-form-field appearance="outline" class="mat-feild ">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Username" formControlName="username" required>
+                        <mat-error>
+                            @if (firstFormGroup.get('username')?.hasError('required') && firstFormGroup.get('username')?.touched) {
+                                Username is required.
+                            }
+                            @if (firstFormGroup.get('username')?.hasError('minlength') && firstFormGroup.get('username')?.touched) {
+                                Username must be 3 characters long.
+                            }
+                            @if (firstFormGroup.get('username')?.hasError('usernameExists') && firstFormGroup.get('username')?.touched) {
+                                Username already exists.
+                            }
+                    </mat-error>
                     </mat-form-field>
+
                 </div>
                 <div>
-                    <mat-form-field appearance="outline" class="w-25">
+                    <mat-form-field appearance="outline" class="mat-feild ">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="Email" formControlName="email" required>
+                        <mat-error>
+                            @if(firstFormGroup.get('email')?.hasError('emailExists') && firstFormGroup.get('email')?.touched){
+                                Email already exists.
+                            }
+                            @if (firstFormGroup.get('email')?.hasError('required') && firstFormGroup.get('email')?.touched) {
+                                Email is required.
+                            }
+                            @if(firstFormGroup.get('email')?.hasError('email') && firstFormGroup.get('email')?.touched){
+                                Invalid email format.
+                            }
+
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-button matStepperNext>Next</button>
+                    <mat-form-field appearance="outline" class="mat-feild ">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="newPassword" required />
+                        <button mat-icon-button matSuffix (click)="clickEvent($event)"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+                            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="mat-feild ">
+                        <mat-label>Confirm password</mat-label>
+                        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="confirmPassword"
+                            required />
+                        <button mat-icon-button matSuffix (click)="clickEvent($event)"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+                            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button matStepperNext>Next</button>
                 </div>
             </div>
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your profile Details">
         <form [formGroup]="secondFormGroup">
             <div class="container mt-5 ">
                 <div>
-                    <mat-form-field appearance="outline" class="w-25">
+                    <mat-form-field appearance="outline" class="mat-feild ">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput placeholder="Ex.Abc Abc" formControlName="name" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="mat-feild ">
                         <mat-label>Address</mat-label>
                         <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
                     </mat-form-field>
                 </div>
                 <div>
-                    <mat-form-field appearance="outline" class="w-25">
-                        <mat-label>Address</mat-label>
-                        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
+                    <mat-form-field appearance="outline"class="mat-feild ">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput placeholder="Ex. +9471000000" formControlName="phoneNumber" required>
                     </mat-form-field>
                 </div>
                 <div>
-                    <mat-form-field appearance="outline" class="w-25">
-                        <mat-label>Address</mat-label>
-                        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
+                    <mat-form-field appearance="outline" class="mat-feild ">
+                        <mat-label>Your Grade</mat-label>
+                        <input matInput placeholder="" formControlName="grade" required>
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <mat-form-field appearance="outline"class="mat-feild ">
+                        <mat-label>Birthday</mat-label>
+                        <input matInput placeholder="yyyy/mm/dd" formControlName="birthday" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button matStepperPrevious>Back</button>
+                    <button mat-flat-button matStepperNext>Next</button>
                 </div>
             </div>
         </form>
@@ -60,11 +117,13 @@
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <div class="container text-center">
-            <h3>You are now done.</h3>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
+            <h3>You are now done.{{firstFormGroup.get('username')?.value}}</h3>
+            <p>Click the button below to complete your registration.</p>
+
+            <div>
+                <button mat-stroked-button matStepperPrevious>Back</button>
+                <button mat-flat-button (click)="register()">Register</button>
+            </div>
         </div>
     </mat-step>
 
