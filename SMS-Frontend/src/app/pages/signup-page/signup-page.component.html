@@ -1,1 +1,71 @@
-<p>signup-page works!</p>
+<div id="signup-header">
+    <h1>Sign Up</h1>
+    <p>Fill out the form below to create an account.</p>
+</div>
+
+<mat-stepper linear="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+
+            <div class="container  mt-5  ">
+                <div>
+                    <mat-form-field appearance="outline" class="w-25 mb-3">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Last name, First name" formControlName="name" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="w-25">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+        <form [formGroup]="secondFormGroup">
+            <div class="container mt-5 ">
+                <div>
+                    <mat-form-field appearance="outline" class="w-25">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="w-25">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="w-25">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="container text-center">
+            <h3>You are now done.</h3>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+        </div>
+    </mat-step>
+
+</mat-stepper>
