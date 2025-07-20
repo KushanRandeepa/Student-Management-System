@@ -39,6 +39,16 @@ public class AuthServiceImpl implements AuthService {
     final JWTUtil jwtUtil;
 
     @Override
+    public boolean isExistedUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean isExistedEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
     @Transactional
     public boolean signupUser(SignupRequest request) {
         try {

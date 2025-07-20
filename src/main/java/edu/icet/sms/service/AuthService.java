@@ -6,7 +6,10 @@ import edu.icet.sms.dto.RefreshTokenRequest;
 import edu.icet.sms.dto.SignupRequest;
 
 public interface AuthService {
+    boolean isExistedUsername(String username);
+    boolean isExistedEmail(String email);
     boolean signupUser(SignupRequest request);
     JwtResponse login(LoginRequest request);
     JwtResponse refreshToken(RefreshTokenRequest token);
+
 }

@@ -30,4 +30,12 @@ public class AuthController {
     public ResponseEntity<JwtResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
         return ResponseEntity.ok(authService.refreshToken(request));
     }
+    @GetMapping("/check-username/{username}")
+    public ResponseEntity<Boolean> checkUsername(@PathVariable  String username){
+        return  ResponseEntity.ok(authService.isExistedUsername(username));
+    }
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<Boolean> checkEmail(@PathVariable  String email){
+        return  ResponseEntity.ok(authService.isExistedEmail(email));
+    }
 }

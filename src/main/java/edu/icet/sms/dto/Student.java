@@ -19,7 +19,7 @@ public class Student {
     private String phoneNumber;
     private String address;
     private String grade;
-    private String state;
+    private String birthday;
     private String imgUrl; // e.g., "https://cdn.example.com/images/students/12.jpg"
     private LocalDateTime createdAt;
 
