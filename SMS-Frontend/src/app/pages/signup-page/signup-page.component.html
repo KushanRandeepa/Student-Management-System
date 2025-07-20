@@ -14,16 +14,19 @@
                         <mat-label>Username</mat-label>
                         <input matInput placeholder="Username" formControlName="username" required>
                         <mat-error>
-                            @if (firstFormGroup.get('username')?.hasError('required') && firstFormGroup.get('username')?.touched) {
-                                Username is required.
+                            @if (firstFormGroup.get('username')?.hasError('required') &&
+                            firstFormGroup.get('username')?.touched) {
+                            Username is required.
                             }
-                            @if (firstFormGroup.get('username')?.hasError('minlength') && firstFormGroup.get('username')?.touched) {
-                                Username must be 3 characters long.
+                            @if (firstFormGroup.get('username')?.hasError('minlength') &&
+                            firstFormGroup.get('username')?.touched) {
+                            Username must be 3 characters long.
                             }
-                            @if (firstFormGroup.get('username')?.hasError('usernameExists') && firstFormGroup.get('username')?.touched) {
-                                Username already exists.
+                            @if (firstFormGroup.get('username')?.hasError('usernameExists') &&
+                            firstFormGroup.get('username')?.touched) {
+                            Username already exists.
                             }
-                    </mat-error>
+                        </mat-error>
                     </mat-form-field>
 
                 </div>
@@ -32,14 +35,16 @@
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="Email" formControlName="email" required>
                         <mat-error>
-                            @if(firstFormGroup.get('email')?.hasError('emailExists') && firstFormGroup.get('email')?.touched){
-                                Email already exists.
+                            @if(firstFormGroup.get('email')?.hasError('emailExists') &&
+                            firstFormGroup.get('email')?.touched){
+                            Email already exists.
                             }
-                            @if (firstFormGroup.get('email')?.hasError('required') && firstFormGroup.get('email')?.touched) {
-                                Email is required.
+                            @if (firstFormGroup.get('email')?.hasError('required') &&
+                            firstFormGroup.get('email')?.touched) {
+                            Email is required.
                             }
                             @if(firstFormGroup.get('email')?.hasError('email') && firstFormGroup.get('email')?.touched){
-                                Invalid email format.
+                            Invalid email format.
                             }
 
                         </mat-error>
@@ -53,6 +58,21 @@
                             [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
                             <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-error>
+                            @if(firstFormGroup.get('newPassword')?.hasError('required') &&
+                            firstFormGroup.get('newPassword')?.touched){
+                            Password is required.
+                            }
+                            @if (firstFormGroup.get('newPassword')?.hasError('minlength') &&
+                            firstFormGroup.get('newPassword')?.touched) {
+                            Password must be at least 6 characters long.
+                            }
+                            @if (firstFormGroup.get('newPassword')?.hasError('pattern') &&
+                            firstFormGroup.get('newPassword')?.touched) {
+                            Password must contain at least one uppercase letter,lowercase letter and number.
+                            }
+                        </mat-error>
+
                     </mat-form-field>
                 </div>
                 <div>
@@ -64,14 +84,26 @@
                             [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
                             <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-error>
+                            @if(firstFormGroup.get('confirmPassword')?.hasError('required') &&
+                            firstFormGroup.get('confirmPassword')?.touched){
+                            Confirm password is required.
+                            }
+                            @if (firstFormGroup.get('confirmPassword')?.hasError('passwordMismatch') &&
+                            firstFormGroup.get('confirmPassword')?.touched) {
+                            Passwords do not match.
+                            }
+                        </mat-error>
+                        <div></div>
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-raised-button matStepperNext>Next</button>
+                    <button mat-flat-button matStepperNext>Next</button>
                 </div>
             </div>
         </form>
     </mat-step>
+
 
     <mat-step [stepControl]="secondFormGroup" label="Fill out your profile Details">
         <form [formGroup]="secondFormGroup">
@@ -80,33 +112,104 @@
                     <mat-form-field appearance="outline" class="mat-feild ">
                         <mat-label>Full Name</mat-label>
                         <input matInput placeholder="Ex.Abc Abc" formControlName="name" required>
+                        <mat-error>
+                            @if(secondFormGroup.get('name')?.hasError('required') &&
+                            secondFormGroup.get('name')?.touched){
+                            Name is required.
+                            }
+                            @if(secondFormGroup.get('name')?.hasError('minlength') &&
+                            secondFormGroup.get('name')?.touched){
+                            Name must be at least 3 characters long.
+                            }
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field appearance="outline" class="mat-feild ">
                         <mat-label>Address</mat-label>
                         <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline"class="mat-feild ">
-                        <mat-label>Phone Number</mat-label>
-                        <input matInput placeholder="Ex. +9471000000" formControlName="phoneNumber" required>
+                        <mat-error>
+                            @if(secondFormGroup.get('address')?.hasError('required') &&
+                            secondFormGroup.get('address')?.touched){
+                            Address is required.
+                            }
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field appearance="outline" class="mat-feild ">
-                        <mat-label>Your Grade</mat-label>
-                        <input matInput placeholder="" formControlName="grade" required>
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput placeholder="Ex. +9471000000" formControlName="phoneNumber" required>
+                        <mat-error>
+                            @if(secondFormGroup.get('phoneNumber')?.hasError('required') &&
+                            secondFormGroup.get('phoneNumber')?.touched){
+                            Phone number is required.
+                            }
+                            @if(secondFormGroup.get('phoneNumber')?.hasError('pattern') &&
+                            secondFormGroup.get('phoneNumber')?.touched){
+                            Invalid phone number format.
+                            }
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div>
-                    <mat-form-field appearance="outline"class="mat-feild ">
+                    <mat-form-field appearance="outline" class="mat-feild ">
+                        <mat-label>Select Grade</mat-label>
+                        <mat-select formControlName="grade" required>
+                            @for (grad of grads; track grad) {
+                            <mat-option [value]="grad.value">{{grad.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>
+                            @if(secondFormGroup.get('grade')?.hasError('required') &&
+                            secondFormGroup.get('grade')?.touched){
+                            Grade is required.
+                            }
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field class="example-full-width mat-feild" appearance="outline">
                         <mat-label>Birthday</mat-label>
-                        <input matInput placeholder="yyyy/mm/dd" formControlName="birthday" required>
+                        <input matInput [matDatepicker]="picker" formControlName="birthday" required>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker">
+                            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>
+                            @if(secondFormGroup.get('birthday')?.hasError('required') &&
+                            secondFormGroup.get('birthday')?.touched){
+                            Birthday is required.
+                            }
+                            @if(secondFormGroup.get('birthday')?.hasError('pattern') &&
+                            secondFormGroup.get('birthday')?.touched){
+                            Invalid date format. Use MM/DD/YYYY.
+                            }
+                        </mat-error>
                     </mat-form-field>
                 </div>
+                @if(userRole === 'ADMIN') {
                 <div>
+                    <mat-form-field appearance="outline" class=" ">
+                        <mat-label>Select ROLE</mat-label>
+                        <mat-select formControlName="role" required>
+                            @for (role of roles; track role) {
+                            <mat-option [value]="role.value">{{role.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>
+                            @if(secondFormGroup.get('role')?.hasError('required') &&
+                            secondFormGroup.get('role')?.touched){
+                            Role is required.
+                            }
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                }
+
+                <div class="mt-3 d-flex gap-2">
                     <button mat-raised-button matStepperPrevious>Back</button>
                     <button mat-flat-button matStepperNext>Next</button>
                 </div>
@@ -117,14 +220,13 @@
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <div class="container text-center">
-            <h3>You are now done.{{firstFormGroup.get('username')?.value}}</h3>
+            <h3>{{firstFormGroup.get('username')?.value}}You are now</h3>
             <p>Click the button below to complete your registration.</p>
 
             <div>
                 <button mat-stroked-button matStepperPrevious>Back</button>
-                <button mat-flat-button (click)="register()">Register</button>
+                <button mat-flat-button (click)="submit()">Register</button>
             </div>
         </div>
     </mat-step>
-
 </mat-stepper>
