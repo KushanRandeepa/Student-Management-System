@@ -94,16 +94,16 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public JwtResponse refreshToken(RefreshTokenRequest token) {
-        String username= jwtUtil.getUserNameFromToken(token.getRefreshToken());
+    public JwtResponse refreshToken(String token) {
+        String username= jwtUtil.getUserNameFromToken(token);
         if(username!=null){
             UserDetails userDetails = new User(username, "", userDetailService.loadUserByUsername(username).getAuthorities());
 
-            if (jwtUtil.isTokenValid(token.getRefreshToken(),userDetails)){
+            if (jwtUtil.isTokenValid(token,userDetails)){
                 var accessToken = jwtUtil.generateAccessToken(userDetails);
                 return JwtResponse.builder()
                         .token(accessToken)
-                        .refreshToken(token.getRefreshToken())
+                        .refreshToken(token)
                         .isLogin(true)
                         .build();
             }

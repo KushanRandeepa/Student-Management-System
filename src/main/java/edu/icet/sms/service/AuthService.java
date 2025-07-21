@@ -10,6 +10,6 @@ public interface AuthService {
     boolean isExistedEmail(String email);
     boolean signupUser(SignupRequest request);
     JwtResponse login(LoginRequest request);
-    JwtResponse refreshToken(RefreshTokenRequest token);
+    JwtResponse refreshToken(String token);
 
 }

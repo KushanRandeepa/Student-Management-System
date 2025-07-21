@@ -41,7 +41,7 @@ public class JWTUtil {
     }
 
     public String generateAccessToken(UserDetails userDetails) {
-        return buildToken(userDetails, 600000);
+        return buildToken(userDetails, 15000);
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
@@ -56,7 +56,7 @@ public class JWTUtil {
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .claim("Role", user.getRole())
-                .claim("customId", user.getId())
+                .claim("customId", user.getCustomId())
                 .signWith(secretKey)
                 .compact();
     }

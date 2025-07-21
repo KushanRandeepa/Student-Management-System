@@ -56,4 +56,17 @@ public class CustomIdServiceImpl implements CustomIdService {
             }
         }
     }
+
+    @Override
+    public Role setEnumRoles(String role) {
+        if(role.equals("TEACHER") || role.equals("teacher")){
+            return Role.TEACHER;
+        }else if (role.equals("ADMIN") || role.equals("admin")){
+            return Role.ADMIN;
+        }
+        return Role.STUDENT;
+    }
+
+
+
 }

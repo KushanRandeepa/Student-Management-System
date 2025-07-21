@@ -28,7 +28,7 @@ public class AuthController {
     }
     @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
-        return ResponseEntity.ok(authService.refreshToken(request));
+        return ResponseEntity.ok(authService.refreshToken(request.getRefreshToken()));
     }
     @GetMapping("/check-username/{username}")
     public ResponseEntity<Boolean> checkUsername(@PathVariable  String username){
