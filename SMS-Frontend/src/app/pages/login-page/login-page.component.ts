@@ -19,10 +19,7 @@ import { LocalStorageService } from '../../services/storage/LocalStorageService'
 export class LoginPageComponent {
 
   private form_builder = inject(FormBuilder)
-  private route = inject(Router)
-  private http = inject(HttpClient)
   private authService=inject(AuthService)
-  private storageService=inject(LocalStorageService);
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -42,21 +39,14 @@ export class LoginPageComponent {
           password: this.loginForm.get('password')?.value as string
         }
         console.log(loginReq);
-        // this.http.post<LoginResponce>('http://localhost:8080/auth/login',loginReq).subscribe({
-        //       next:(res)=>{
-        //         console.log(res);
-        //         this.storageService.setAuthdata(res.token,res.refreshToken)
-        //       },
-        //       error:(error)=>{
-        //         alert('loginerror'+error)
-        //       }
-        //     });
-
-
         this.authService.login(loginReq);
     } else {
       alert("enter Useranme and Password");
     }
+  }
+
+  logOut(){
+    
   }
 
 

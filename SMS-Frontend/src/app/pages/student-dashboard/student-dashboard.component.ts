@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -10,6 +11,7 @@ import { Component, inject, OnInit } from '@angular/core';
 export class StudentDashboardComponent implements OnInit{
 
   http=inject(HttpClient);
+  authService=inject(AuthService)
   constructor(){
 
   }
@@ -23,7 +25,10 @@ export class StudentDashboardComponent implements OnInit{
       }
     })
   }
-
+  
+  logout(){
+  this.authService.logout();
+  }
   
   
 }
