@@ -40,3 +40,8 @@
   background-attachment: scroll;
   width: 100vw;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}
