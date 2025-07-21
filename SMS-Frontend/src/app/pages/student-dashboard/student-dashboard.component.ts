@@ -12,10 +12,15 @@ export class StudentDashboardComponent implements OnInit{
 
   http=inject(HttpClient);
   authService=inject(AuthService)
+  userRole!: string | null
+  userId!: string | null
+
   constructor(){
 
   }
   ngOnInit(): void {
+  this.userRole=this.authService.getUserRole();
+  this.userId=this.authService.getUserId()
     this.http.get( 'http://localhost:8080/student/getAll').subscribe({
       next:(res)=>{
         console.log(res)

@@ -9,6 +9,9 @@ export class LocalStorageService{
 
     private readonly TOKEN_KEY='auth_token_S14';
     private readonly REFRSH_TOKEN_KEY='reresh_token_S14';
+    
+    private Role='';
+    private customId='';
 
     constructor(){}
 
@@ -28,6 +31,10 @@ export class LocalStorageService{
     }
     getRefreshToken():string|null{
     return localStorage.getItem(this.REFRSH_TOKEN_KEY);
+    }
+
+    setUserdata():void{
+        
     }
 
 } 

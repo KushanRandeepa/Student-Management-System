@@ -20,6 +20,7 @@ export class LoginPageComponent {
 
   private form_builder = inject(FormBuilder)
   private authService=inject(AuthService)
+  
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -40,14 +41,18 @@ export class LoginPageComponent {
         }
         console.log(loginReq);
         this.authService.login(loginReq);
+        
+       
     } else {
       alert("enter Useranme and Password");
     }
   }
 
   logOut(){
-    
+    this.authService.logout()
   }
+
+  
 
 
 }
