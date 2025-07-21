@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
-import { AuthBypassService } from '../AuthbypassService';
+import { AuthBypassService } from '../bypassAuthService';
 
 export interface IDeactivateGuard{
     canDeactivate():boolean;

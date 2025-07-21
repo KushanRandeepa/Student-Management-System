@@ -8,13 +8,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthBypassService } from '../../services/AuthbypassService';
+import { AuthBypassService } from '../../services/bypassAuthService';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { SignupRequest } from '../../models/SignupRequest';
-import { UserData } from '../../models/UserData';
-import { U } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-signup-page',
@@ -26,7 +24,7 @@ import { U } from '@angular/cdk/keycodes';
 export class SignupPageComponent implements IDeactivateGuard, OnInit {
 
   private readonly http = inject(HttpClient);
-  private _formBuilder = inject(NonNullableFormBuilder);
+  private _formBuilder = inject(FormBuilder);
 
   route = inject(Router)
   bypassService = inject(AuthBypassService)
@@ -41,14 +39,6 @@ export class SignupPageComponent implements IDeactivateGuard, OnInit {
 
   hide = signal(true);
   isLinear = false;
-
-  // signupRequest: SignupRequest = {
-  //   username: '',
-  //   email: '',
-  //   phoneNumber: '',  
-  //   password: '',
-  //   role: 'STUDENT'
-  // };
 
   grads: { value: string, viewValue: string }[] = [
     { value: 'A/L', viewValue: 'AL' },

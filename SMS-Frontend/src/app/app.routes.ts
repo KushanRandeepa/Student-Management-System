@@ -3,6 +3,8 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { DeactivateGuardGuard } from './services/guards/DeactivateGuard-service';
+import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
+import { AdminDashboardPageComponent } from './pages/admin-dashboard-page/admin-dashboard-page.component';
 
 export const routes: Routes = [
     {
@@ -17,5 +19,13 @@ export const routes: Routes = [
     {
         path:'login',
         component:LoginPageComponent
+    },
+    {
+        path:'student-dashboard',
+        component:StudentDashboardComponent
+    },
+    {
+        path:'admin-dashboard',
+        component:AdminDashboardPageComponent
     }
 ];
