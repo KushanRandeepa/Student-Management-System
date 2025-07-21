@@ -1,14 +1,15 @@
-import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { LocalStorageService } from '../services/storage/LocalStorageService';
 import { R, T } from '@angular/cdk/keycodes';
-import { catchError, switchMap, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const storageServce = inject(LocalStorageService);
   const token = storageServce.getAuthToken();
   const authService = inject(AuthService);
+
   if (token && !isAuthRequest(req)) {
     req = addToken(req, token)
 
@@ -38,20 +39,15 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 
   function handle401Error(
-    request: any,
+    request:  HttpRequest<any>,
     next: HttpHandlerFn,
-    authService: AuthService)
-     {
+    authService: AuthService): Observable<HttpEvent<any>> {
     return authService.refrshToken().pipe(
       switchMap((response) => {
-        return next(
-          request.clone({
-            setHeaders: {
-              Authorization: `Bearer ${response.token}`,
-            },
-          })
-        )
+        const newRequest = addToken(request, response.token);
+        return next(newRequest);
       }),
+    
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error)
       })
@@ -59,6 +55,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   }
 }
+
 // };
 // .subscribe({
 //       next: (res) => {

@@ -33,10 +33,13 @@ export class AuthService {
   logout() {
     this.storageService.removeAuthdata();
     this.router.navigateByUrl('');
+    
   }
   refrshToken() {
-    const request=this.storageService.getRefreshToken();
-    return this.http.post<LoginResponce>(`${this.BASE_URL}/refresh`, request).pipe(
+    const refreshToken =this.storageService.getRefreshToken();
+    console.log({ refreshToken }); // Should print { refreshToken: '...' }
+
+    return this.http.post<LoginResponce>(`${this.BASE_URL}/refresh`,{refreshToken:refreshToken }).pipe(
       tap((response)=>{
         console.log(' token refrsh successfull ',response )
         this.storageService.setAuthdata(response.token,response.refreshToken);
