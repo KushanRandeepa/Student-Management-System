@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+
+
+<ng-container *ngIf="!(authService.isLoggingIn$ | async); else loggingIn">
+    <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #loggingIn>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="spinner-grow text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>

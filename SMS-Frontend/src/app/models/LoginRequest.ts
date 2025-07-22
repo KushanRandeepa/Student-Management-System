@@ -8,7 +8,7 @@ export interface LoginRequest{
 export interface LoginResponce{
     token:string;
     refreshToken:string;
-    isLogin:string;
+    isLogin:Boolean;
 }
 
 export interface Userdata{

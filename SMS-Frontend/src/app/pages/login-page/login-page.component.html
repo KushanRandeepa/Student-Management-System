@@ -29,11 +29,11 @@
                         <mat-error>
                             @if (loginForm.get('password')?.hasError('required') &&
                             loginForm.get('password')?.touched) {
-                            Username is required.
+                            Password is required.
                             }
                             @if (loginForm.get('password')?.hasError('minlength') &&
                             loginForm.get('password')?.touched) {
-                            Username must be 6 characters long.
+                            Password must be 6 characters long.
                             }</mat-error>
                     </mat-form-field>
                 </div>

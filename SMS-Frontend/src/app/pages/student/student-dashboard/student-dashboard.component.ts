@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth-service.service';
+import { AuthService } from '../../../services/auth-service.service';
+import { HttpClient } from '@angular/common/http';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-student-dashboard',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.css'
 })
@@ -16,11 +17,13 @@ export class StudentDashboardComponent implements OnInit{
   userId!: string | null
 
   constructor(){
+    this.userRole=this.authService.getUserRole();
+  this.userId=this.authService.getUserId()
+
 
   }
   ngOnInit(): void {
-  this.userRole=this.authService.getUserRole();
-  this.userId=this.authService.getUserId()
+  
     this.http.get( 'http://localhost:8080/student/getAll').subscribe({
       next:(res)=>{
         console.log(res)
@@ -32,8 +35,7 @@ export class StudentDashboardComponent implements OnInit{
   }
   
   logout(){
-  this.authService.logout();
+    this.authService.logout();
   }
-  
-  
+
 }

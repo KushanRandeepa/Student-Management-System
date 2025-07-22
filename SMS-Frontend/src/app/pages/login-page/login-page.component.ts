@@ -4,8 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { LoginRequest, LoginResponce } from '../../models/LoginRequest';
+import {  RouterLink } from '@angular/router';
+import { LoginRequest } from '../../models/LoginRequest';
 import { AuthService } from '../../services/auth-service.service';
 
 @Component({
@@ -46,9 +46,9 @@ export class LoginPageComponent {
     }
   }
 
-  logOut() {
-    this.authService.logout()
-  }
+  // logOut() {
+  //   this.authService.logout()
+  // }
 
 
 

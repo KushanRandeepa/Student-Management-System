@@ -3,9 +3,10 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { DeactivateGuardGuard } from './services/guards/DeactivateGuard-service';
-import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
-import { AdminDashboardPageComponent } from './pages/admin-dashboard-page/admin-dashboard-page.component';
-
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { StudentDashboardComponent } from './pages/student/student-dashboard/student-dashboard.component';
+import { StudentMyclassPageComponent } from './pages/student/student-myclass-page/student-myclass-page.component';
+import { NotfoundPageComponent } from './pages/notfound-page/notfound-page.component';
 export const routes: Routes = [
     {
         path:'',
@@ -22,10 +23,26 @@ export const routes: Routes = [
     },
     {
         path:'student-dashboard',
-        component:StudentDashboardComponent
+        component:StudentDashboardComponent,
+        children:[
+            {
+                path:'my-class',
+                component:StudentMyclassPageComponent
+            }
+        ]
+            
+        
     },
     {
         path:'admin-dashboard',
-        component:AdminDashboardPageComponent
+        component:AdminDashboardComponent
+    },
+    {
+        path:'not-found',
+        component:NotfoundPageComponent
+    },
+    {
+        path:'**',
+        redirectTo:'not-found'
     }
 ];
