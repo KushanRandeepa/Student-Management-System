@@ -34,11 +34,11 @@ export class AuthService {
           this.storageService.setAuthdata(res.token, res.refreshToken)
           const decoder: DecodeToken = jwtDecode(res.token)
 
-          let redirectUrl = '/student-dashboard'
+          let redirectUrl = '/student/dashboard'
           if (decoder.Role === 'ADMIN') {
-            redirectUrl = '/admin-dashboard'
+            redirectUrl = '/admin/dashboard'
           } else if (decoder.Role === 'TEACHER') {
-            redirectUrl = '/teacher-dashboard'
+            redirectUrl = '/teacher/dashboard'
           }
           await this.route.navigateByUrl(redirectUrl);
 

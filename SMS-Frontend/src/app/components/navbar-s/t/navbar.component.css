@@ -1,0 +1,16 @@
+#Navbar2{
+margin-top: 100px;
+   
+}
+#navbar1{
+margin-bottom: 30px;
+background-color: rgb(255, 255, 255);
+}
+.navBarLi{
+    margin-left: 10px;
+    margin-right: 50px;
+    font-weight: 600;
+    font-size: large;
+    color: black;
+/* aria-disabled="true" */
+}

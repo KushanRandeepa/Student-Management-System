@@ -1,0 +1,118 @@
+<nav class="navbar  fixed-top" id="navbar1">
+    <div class="container-fluid">
+        <h1 class=" text-center">Student Management System</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+            <div class="dropdown offcanvas-header">
+                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt=""
+                        width="32" height="32" class="rounded-circle me-2">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">{{userId}}</h5>
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item"> <a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dropdown</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li> <hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-secondary mt-4 " (click)="logout()" type="button">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary nav nav-pills " id="Navbar2">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    @if(userRole==='STUDENT'){
+                        <a class="nav-link navBarLi ms-lg-5" routerLink="/student/dashboard">Dashboard</a>
+                    }@else{
+                        <a class="nav-link navBarLi ms-lg-5" routerLink="/teacher/dashboard">Dashboard</a>
+                    }
+                    
+                </li>
+                <li class="nav-item navBarLi">
+                    @if(userRole==='STUDENT'){
+                        <a class="nav-link " routerLink="/student/my-class">My Class</a>
+                    }@else{
+                        <a class="nav-link " routerLink="/teacher/my-lectures">My Lectures</a>
+                    }
+
+                </li>
+                <li class="nav-item navBarLi">
+                    @if(userRole==='STUDENT'){
+                        <a class="nav-link " routerLink="/student/store">Store</a>
+                    }@else{
+                        <a class="nav-link" routerLink="/teacher/view-students">Students</a>
+                    }
+
+                </li>
+                <li class="nav-item navBarLi dropdown navBarLi">
+                    @if(userRole==='STUDENT'){
+                        <a class="nav-link " routerLink="/student/my-notes">My Notes</a>
+                    }@else {
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"routerLink="/teacher/exam-task">Exam Tasks</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item">Upload Paper</a></li>
+                                <li><a class="dropdown-item">Rewive Peper </a></li>
+                            </ul>
+                    }
+
+                </li>
+
+                <li class="nav-item dropdown navBarLi">
+                     @if(userRole==='STUDENT'){
+                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"routerLink="/student/exams">Exam</a>
+                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item">Papers</a></li>
+                                <li><a class="dropdown-item">Marks </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>               
+                         }
+                </li>
+            
+            </ul>
+            <form class="d-flex " role="search">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-danger" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

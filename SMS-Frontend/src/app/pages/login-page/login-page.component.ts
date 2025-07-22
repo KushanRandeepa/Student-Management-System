@@ -39,6 +39,7 @@ export class LoginPageComponent {
       }
       console.log(loginReq);
       this.authService.login(loginReq);
+      
 
 
     } else {
