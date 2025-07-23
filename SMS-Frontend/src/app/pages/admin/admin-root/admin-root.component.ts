@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
+import { IDeactivateGuard } from '../../../services/guards/DeactivateGuard-service';
+import { AuthService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-admin-root',
@@ -8,6 +10,12 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './admin-root.component.html',
   styleUrl: './admin-root.component.css'
 })
-export class AdminRootComponent {
+export class AdminRootComponent  {
+
+authService=inject(AuthService)
+
+  logout(){
+    this.authService.logout()
+  }
 
 }

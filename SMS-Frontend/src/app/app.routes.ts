@@ -20,6 +20,7 @@ import { ExamTasksPageComponent } from './pages/teacher/exam-tasks-page/exam-tas
 import { StudentManagerPageComponent } from './pages/admin/student-manager-page/student-manager-page.component';
 import { TeacherManagerPageComponent } from './pages/admin/teacher-manager-page/teacher-manager-page.component';
 import { PaymentsManagerPageComponent } from './pages/admin/payments-manager-page/payments-manager-page.component';
+import { AuthGuardService } from './services/guards/authGuardService.guard';
 export const routes: Routes = [
     {
         path: '',
@@ -64,6 +65,7 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminRootComponent,
+        // canActivate:[AuthGuardService],
         children: [
             {
                 path: 'dashboard',

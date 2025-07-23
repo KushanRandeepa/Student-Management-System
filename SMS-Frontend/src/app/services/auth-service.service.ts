@@ -15,6 +15,7 @@ export class AuthService {
 
   private loginState = new BehaviorSubject<boolean>(false);
   public isLoggingIn$ = this.loginState.asObservable();
+
   private readonly BASE_URL = 'http://localhost:8080/auth';
   http = inject(HttpClient)
   route = inject(Router)
@@ -28,6 +29,7 @@ export class AuthService {
 
   login(request: LoginRequest) {
     this.setLoggingIn(true);
+
     this.http.post<LoginResponce>(`${this.BASE_URL}/login`, request).subscribe({
       next: async (res) => {
         if (res.token != null) {
@@ -41,7 +43,6 @@ export class AuthService {
             redirectUrl = '/teacher/dashboard'
           }
           await this.route.navigateByUrl(redirectUrl);
-
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -49,11 +50,12 @@ export class AuthService {
             showConfirmButton: false,
             timer: 1500
           });
-
           this.setLoggingIn(false);
+
         } else {
           this.setLoggingIn(true); // show spinner or loading view
           this.storageService.removeAuthdata();
+
 
           setTimeout(() => {
             Swal.fire({
@@ -86,8 +88,12 @@ export class AuthService {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Logout !"
     }).then((result) => {
- this.storageService.removeAuthdata();
-    this.route.navigateByUrl('');
+      this.storageService.removeAuthdata();
+      this.route.navigateByUrl('/', { replaceUrl: true });
+      window.onpopstate = function () {
+        history.go(1);
+      };
+
       if (result.isConfirmed) {
         Swal.fire({
           title: "Logout!",
@@ -96,7 +102,7 @@ export class AuthService {
         });
       }
     });
-   
+
   }
 
 
@@ -130,5 +136,7 @@ export class AuthService {
     const decoder: DecodeToken = jwtDecode(token)
     return decoder.customId;
   }
+
+
 
 }
